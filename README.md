@@ -56,6 +56,7 @@
     "recipe": "Spaghetti Carbonara\n\nIngredients:\n- 200g spaghetti\n- 100g pancetta\n- 2 eggs\n- 50g Parmesan cheese\n- 50g Pecorino cheese\n- Salt and pepper\n\nInstructions:\n1. Cook the spaghetti according to the package instructions.\n2. Fry the pancetta in a pan until crispy.\n3. Beat the eggs and mix with the cheeses.\n4. Combine the spaghetti with pancetta, then toss with the egg mixture until creamy.\n5. Season with salt and pepper.\n\nCuisine Type: Italian\nTaste: Savory, Creamy\nPrep Time: 20 minutes\nReviews: 100"
   }
 ]
+```
 **Sample Response**:
 ```json
 [
@@ -78,6 +79,7 @@
   }
 
 ]
+```
 **Sample Response**:
 ```json
 [
@@ -93,6 +95,7 @@
 **Summary**:Add image recipe
 **Sample Payload**:
 Multipart file
+```
 **Sample Response**:
 ```json
 [
