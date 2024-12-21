@@ -12,6 +12,8 @@ from pydantic import BaseModel
 import os
 from dotenv import load_dotenv
 from pathlib import Path
+from PIL import Image
+import pytesseract
 
 class IngredientCreate(BaseModel):
     name: str
@@ -159,3 +161,25 @@ async def generate_recipe(
         return {"recipe": response.text}
     else:
         raise HTTPException(status_code=500, detail="Failed to generate recipe")
+
+
+@app.post("/recipes/image")
+def add_recipe_from_image(image: UploadFile = File(...)):
+    # Extract text from the uploaded image
+    recipe_text = extract_text_from_image(image)
+    if not recipe_text:
+        raise HTTPException(status_code=400, detail="No text found in the image")
+    
+    # Save the extracted text as a recipe
+    save_recipe_to_file(recipe_text)
+    return {"message": "Recipe added successfully from image!", "recipe": recipe_text}
+
+def extract_text_from_image(image_file: UploadFile) -> str:
+    try:
+        # Load the image file
+        image = Image.open(image_file.file)
+        # Perform OCR to extract text
+        text = pytesseract.image_to_string(image)
+        return text.strip()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error processing image: {str(e)}")
